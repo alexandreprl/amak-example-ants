@@ -13,12 +13,10 @@ public class AntAgent extends Agent<AntHill, WorldEnvironment> {
 	 * Y coordinate of the ant in the world
 	 */
 	public double dy;
-	private final VectorialGraphicsPanel graphicsPanel;
 	/**
 	 * Angle in radians
 	 */
-	private double angle = Math.random() * Math.PI * 2;
-	private DrawableImage image;
+	public double angle = Math.random() * Math.PI * 2;
 
 	/**
 	 * Constructor of the ant
@@ -30,12 +28,10 @@ public class AntAgent extends Agent<AntHill, WorldEnvironment> {
 	 * @param startY
 	 *            Initial Y coordinate
 	 */
-	public AntAgent(AntHill amas, double startX, double startY, VectorialGraphicsPanel graphicsPanel) {
+	public AntAgent(AntHill amas, double startX, double startY) {
 		super(amas);
 		dx = startX;
 		dy = startY;
-		this.graphicsPanel = graphicsPanel;
-		image = new DrawableImage(graphicsPanel, dx, dy, getClass().getResource("/ant.png").getFile());
 	}
 
 	/**
@@ -57,19 +53,11 @@ public class AntAgent extends Agent<AntHill, WorldEnvironment> {
 			dy += getAmas().getEnvironment().getHeight();
 
 		if (amas.getEnvironment().getRandom().nextDouble() < 0.001) {
-			image.setFilename(getClass().getResource("/ant_dead.png").getFile());
 			destroy();
 		}
 
 		if (amas.getEnvironment().getRandom().nextDouble() < 0.001) {
-			new AntAgent(getAmas(), dx, dy, graphicsPanel);
+			new AntAgent(getAmas(), dx, dy);
 		}
 	}
-
-	@Override
-	protected void onAgentCycleEnd() {
-		image.move(dx, dy);
-		image.setAngle(angle);
-	}
-
 }
