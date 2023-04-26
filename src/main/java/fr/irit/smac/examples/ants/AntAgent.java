@@ -35,7 +35,7 @@ public class AntAgent extends Agent<AntHill, WorldEnvironment> {
 		dx = startX;
 		dy = startY;
 		this.graphicsPanel = graphicsPanel;
-		image = graphicsPanel.createImage(dx, dy, getClass().getResource("/ant.png").getFile());
+		image = new DrawableImage(graphicsPanel, dx, dy, getClass().getResource("/ant.png").getFile());
 	}
 
 	/**
